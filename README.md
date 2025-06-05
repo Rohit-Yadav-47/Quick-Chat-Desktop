@@ -1,7 +1,7 @@
 # 🤖 AI Assistant - Desktop Chatbot
+![image](https://github.com/user-attachments/assets/9c00b3ce-cb35-498f-9b8b-d75c086a3fbe)
 
 <div align="center">
-![image](https://github.com/user-attachments/assets/9c00b3ce-cb35-498f-9b8b-d75c086a3fbe)
 
 **A beautiful, lightweight AI chatbot desktop application powered by Google Gemini API**
 
