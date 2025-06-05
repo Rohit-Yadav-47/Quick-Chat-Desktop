@@ -11,16 +11,22 @@ function createChatbotWindow() {
   if (chatbotWindow) {
     chatbotWindow.show();
     chatbotWindow.focus();
+    chatbotWindow.center();
+    // Temporarily set always on top to bring it to front
+    chatbotWindow.setAlwaysOnTop(true, 'floating');
+    setTimeout(() => {
+      chatbotWindow.setAlwaysOnTop(true); // Reset to normal always on top
+    }, 100);
     return;
   }
     // Create a new browser window for the chatbot
   chatbotWindow = new BrowserWindow({
     width: 700,
-    height: 600, // Larger initial height to show full popup
+    height: 400, // Fixed compact height
     title: 'AI Assistant',
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
     },
     transparent: true,
@@ -38,6 +44,11 @@ function createChatbotWindow() {
 
   // Load the chatbot HTML file
   chatbotWindow.loadFile('chatbot.html');
+  
+  // Open DevTools in development
+  if (process.env.NODE_ENV === 'development' || process.argv.includes('--dev')) {
+    chatbotWindow.webContents.openDevTools();
+  }
   
   // Focus on the window to ensure it's in the foreground
   chatbotWindow.focus();

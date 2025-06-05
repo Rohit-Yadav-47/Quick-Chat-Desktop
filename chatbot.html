@@ -4,93 +4,7 @@
     <meta charset="UTF-8">    <title>Chatbot</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" href="new_styles.css">    <style>
-        #raycast-container {
-            position: relative;
-            margin: 40px auto 0;
-            width: 700px;
-            height: 600px;
-            min-height: 400px;
-            max-height: 80vh;
-            background-color: #1a1a1a;
-            border-radius: 14px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        .raycast-search-bar {
-            padding: 15px 18px;
-            display: flex;
-            align-items: center;
-            background-color: #2a2a2a;
-            border-radius: 10px;
-            margin: 15px 15px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        #raycast-input {
-            padding: 8px 10px;
-            margin: 0 8px;
-            background-color: transparent;
-            border: none;
-            color: #ffffff;
-            font-size: 16px;
-            width: 100%;
-            outline: none;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-        
-        .raycast-header {
-            display: none; /* Hide the header */
-        }
-        
-        .raycast-shortcut {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .raycast-shortcut kbd {
-            background-color: #3a3a3a;
-            border-radius: 5px;
-            padding: 3px 7px;
-            color: #ffffff;
-            font-size: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .raycast-search-icon {
-            color: #aaa;
-            width: 20px;
-            height: 20px;
-        }
-        
-        .raycast-loader {
-            display: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-top: 2px solid #FF6363;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        #raycast-results {
-            padding: 5px 0;
-        }
-        
-        #raycast-conversation {
-            padding: 5px 10px;
-        }
+        /* All styles moved to new_styles.css */
     </style>
 </head>
 <body>    <div id="raycast-container">
@@ -103,6 +17,42 @@
             </div>
             <input type="text" id="raycast-input" placeholder="Ask me anything..." autofocus>
             <div class="raycast-loader"></div>
+            
+            <!-- Model selector - hidden initially -->
+            <select id="raycast-model-select" class="raycast-model-select" style="display: none;">
+                <option value="gemini-2.0-flash">2.0 Flash</option>
+                <option value="gemini-1.5-pro">1.5 Pro</option>
+                <option value="gemini-1.5-flash">1.5 Flash</option>
+                <option value="gemini-1.5-pro-002">2.5 Pro</option>
+                <option value="gemini-1.5-flash-002">2.5 Flash</option>
+                <option value="gemini-1.0-pro">1.0 Pro</option>
+            </select>
+            
+            <!-- Clear button -->
+            <button id="raycast-clear-btn" class="raycast-clear-btn" style="display: none;" title="Clear conversation (Ctrl+L)">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 8L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M6 12L10 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 4L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <!-- Send button -->
+            <button id="raycast-send-btn" class="raycast-send-btn" style="display: none;">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 10L18 2L11 10L18 18L2 10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <!-- Settings icon -->
+            <button id="raycast-settings-btn" class="raycast-settings-btn" title="Settings (Ctrl+,)">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M10 7a3 3 0 100 6 3 3 0 000-6z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M10 1v3M10 16v3M18.5 10h-3M4.5 10h-3M15.5 4.5l-2.1 2.1M6.6 13.4l-2.1 2.1M15.5 15.5l-2.1-2.1M6.6 6.6l-2.1-2.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
             <div class="raycast-shortcut">
                 <kbd>⏎</kbd>
             </div>
@@ -114,9 +64,11 @@
         
         <div class="raycast-footer">
             <div class="raycast-tips">
-                <span class="raycast-hint"><kbd>Esc</kbd> to dismiss</span>
+                <span class="raycast-hint"><kbd>Ctrl+Q</kbd> open</span>
+                <span class="raycast-hint"><kbd>Esc</kbd> close</span>
+                <span class="raycast-hint"><kbd>Ctrl+L</kbd> clear</span>
+                <span class="raycast-hint"><kbd>Ctrl+,</kbd> settings</span>
             </div>
-            <div class="raycast-version">v1.0.0</div>
         </div>
     </div>
     

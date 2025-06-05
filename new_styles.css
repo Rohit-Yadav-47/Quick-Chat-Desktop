@@ -29,7 +29,7 @@ body {
 #raycast-container {
     width: 700px;
     background-color: var(--raycast-container-bg);
-    overflow: auto;
+    overflow: hidden;
     border-radius: 16px;
     box-shadow: 0 20px 40px var(--raycast-shadow), 0 0 0 1px var(--raycast-border);
     backdrop-filter: blur(20px);
@@ -37,11 +37,12 @@ body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 5px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    height: 600px;
-    max-height: calc(100vh - 20px);
+    transform: translate(-50%, -50%);
+    height: 400px; /* Fixed compact size */
+    min-height: 400px;
+    max-height: 400px;
     animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -77,12 +78,20 @@ body {
 }
 
 .raycast-search-bar {
-    padding: 8px 12px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     background-color: var(--raycast-input-bg);
     border-radius: 12px;
     position: relative;
+    border: 1px solid var(--raycast-border);
+    transition: all 0.2s ease;
+    margin: 16px;
+}
+
+.raycast-search-bar:focus-within {
+    border-color: var(--raycast-accent);
+    box-shadow: 0 0 0 2px rgba(255, 99, 99, 0.2);
 }
 
 .raycast-search-icon {
@@ -135,14 +144,14 @@ body {
 }
 
 #raycast-results {
-    max-height: 400px;
+    height: 300px; /* Fixed height for chat area */
     overflow-y: auto;
     padding: 4px 0;
     background-color: transparent;
     position: relative;
     scrollbar-width: thin;
     scrollbar-color: var(--raycast-text-secondary) transparent;
-    flex: 1; /* Take remaining space */
+    display: none; /* Hide by default */
 }
 
 #raycast-results::-webkit-scrollbar {
@@ -170,12 +179,13 @@ body {
 }
 
 .raycast-message {
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    max-width: 90%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 85%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    margin: 4px 0;
 }
 
 .raycast-user-message {
@@ -200,13 +210,28 @@ body {
 }
 
 .raycast-footer {
-    padding: 8px 12px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-top: 1px solid var(--raycast-border);
     font-size: 11px;
     color: var(--raycast-text-secondary);
     margin-top: auto;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.raycast-tips {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.raycast-hint {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .raycast-hint kbd {
@@ -351,4 +376,352 @@ pre {
 /* Copy button success state */
 .raycast-copy-btn.success {
     color: #4CD964;
+}
+
+/* Enhanced Settings Panel */
+.raycast-settings-btn {
+    background: transparent;
+    border: none;
+    color: var(--raycast-text-secondary);
+    padding: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    z-index: 100;
+}
+
+.raycast-settings-btn:hover {
+    background: var(--raycast-hover);
+    color: var(--raycast-text);
+    transform: scale(1.05);
+    border: 1px solid var(--raycast-accent);
+}
+
+.raycast-settings-btn:active {
+    transform: scale(0.95);
+}
+
+.raycast-settings-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.raycast-settings-panel {
+    position: absolute;
+    top: 100%;
+    left: 16px;
+    right: 16px;
+    background: var(--raycast-container-bg);
+    border-radius: 12px;
+    border: 1px solid var(--raycast-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    animation: settingsSlideIn 0.2s ease;
+    margin-top: 8px;
+    min-height: 200px;
+    max-width: 400px;
+    width: calc(100% - 32px);
+}
+
+@keyframes settingsSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.raycast-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--raycast-border);
+}
+
+.raycast-settings-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--raycast-text);
+}
+
+.raycast-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--raycast-text-secondary);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.raycast-close-btn:hover {
+    background: var(--raycast-hover);
+    color: var(--raycast-text);
+}
+
+.raycast-settings-content {
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.raycast-settings-footer {
+    padding: 0 20px 20px;
+}
+
+.raycast-settings-status {
+    background: var(--raycast-accent);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-align: center;
+    animation: slideInStatus 0.3s ease;
+}
+
+.raycast-settings-status.error {
+    background: #ff4444;
+}
+
+@keyframes slideInStatus {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.raycast-setting-group {
+    margin-bottom: 20px;
+}
+
+.raycast-setting-group:last-child {
+    margin-bottom: 0;
+}
+
+.raycast-setting-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--raycast-text);
+    margin-bottom: 8px;
+}
+
+.raycast-setting-group input,
+.raycast-setting-group select {
+    width: 100%;
+    background: var(--raycast-input-bg);
+    border: 1px solid var(--raycast-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--raycast-text);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.raycast-setting-group input:focus,
+.raycast-setting-group select:focus {
+    border-color: var(--raycast-accent);
+    box-shadow: 0 0 0 2px rgba(255, 99, 99, 0.2);
+}
+
+.raycast-setting-group input[type="range"] {
+    padding: 0;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--raycast-border);
+    border-radius: 3px;
+}
+
+.raycast-setting-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--raycast-accent);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.raycast-setting-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.raycast-setting-group small {
+    display: block;
+    font-size: 12px;
+    color: var(--raycast-text-secondary);
+    margin-top: 4px;
+}
+
+.raycast-setting-group small a {
+    color: var(--raycast-accent);
+    text-decoration: none;
+}
+
+.raycast-setting-group small a:hover {
+    text-decoration: underline;
+}
+
+.raycast-save-btn {
+    background: var(--raycast-accent);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.raycast-save-btn:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+.raycast-save-btn:active {
+    transform: translateY(0);
+}
+
+/* Model Selector in Search Bar */
+.raycast-model-select {
+    background: var(--raycast-container-bg);
+    border: 1px solid var(--raycast-border);
+    border-radius: 6px;
+    color: var(--raycast-text);
+    font-size: 12px;
+    padding: 4px 8px;
+    margin: 0 8px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.raycast-model-select:hover {
+    background: var(--raycast-hover);
+}
+
+.raycast-model-select option {
+    background: var(--raycast-container-bg);
+    color: var(--raycast-text);
+    padding: 4px;
+}
+
+.raycast-model-select:focus {
+    border-color: var(--raycast-accent);
+    box-shadow: 0 0 0 2px rgba(255, 99, 99, 0.2);
+}
+
+/* Clear Button */
+.raycast-clear-btn {
+    background: rgba(255, 153, 51, 0.8);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+.raycast-clear-btn:hover {
+    background: #ff9933;
+    transform: scale(1.05);
+}
+
+.raycast-clear-btn:active {
+    transform: scale(0.95);
+}
+
+.raycast-clear-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Send Button */
+.raycast-send-btn {
+    background: var(--raycast-accent);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+.raycast-send-btn:hover {
+    background: #ff5252;
+    transform: scale(1.05);
+}
+
+.raycast-send-btn:active {
+    transform: scale(0.95);
+}
+
+.raycast-send-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Hide results initially */
+#raycast-results {
+    display: none;
+}
+
+/* Responsive search bar */
+.raycast-search-bar {
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/* Shortcut styling */
+.raycast-shortcut {
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+/* --- FORCE OVERRIDE FOR BUTTON ALIGNMENT --- */
+.raycast-search-bar .raycast-settings-btn,
+.raycast-search-bar .raycast-clear-btn,
+.raycast-search-bar .raycast-send-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
 }
