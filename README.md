@@ -1,4 +1,4 @@
-# 🤖 AI Assistant - Desktop Chatbot
+# 🤖 Quick Chat - Desktop Chatbot
 ![image](https://github.com/user-attachments/assets/9c00b3ce-cb35-498f-9b8b-d75c086a3fbe)
 
 <div align="center">
