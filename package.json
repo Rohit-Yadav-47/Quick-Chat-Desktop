@@ -2,17 +2,74 @@
   "name": "ai-search-chatbot",
   "version": "1.0.0",
   "main": "main.js",
+  "homepage": "./",
   "scripts": {
     "start": "electron .",
     "dev": "NODE_ENV=development electron . --dev",
+    "build": "electron-builder",
+    "build-linux": "electron-builder --linux",
+    "dist": "electron-builder --publish=never",
+    "pack": "electron-builder --dir",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["ai", "chatbot", "gemini", "electron"],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ai",
+    "chatbot",
+    "gemini",
+    "electron",
+    "desktop",
+    "assistant"
+  ],
+  "author": {
+    "name": "AI Assistant",
+    "email": "computerfun200@gmail.com"
+  },
+  "license": "MIT",
   "description": "A beautiful AI chatbot application powered by Google Gemini API",
+  "build": {
+    "appId": "com.aiassistant.chatbot",
+    "productName": "AI Assistant",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "chatbot.html",
+      "chatbot.js",
+      "new_styles.css",
+      "node_modules/**/*"
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility"
+    },
+    "extraResources": []
+  },
   "dependencies": {
+    "@google/genai": "^1.4.0"
+  },
+  "devDependencies": {
     "electron": "^36.4.0",
-    "@google/genai": "^0.21.0"
+    "electron-builder": "^25.0.5"
   }
 }
