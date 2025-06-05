@@ -1,11 +1,7 @@
 # 🤖 AI Assistant - Desktop Chatbot
 
 <div align="center">
-
-![AI Assistant](https://img.shields.io/badge/AI-Assistant-blue?style=for-the-badge&logo=robot)
-![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge)
-![Platform](https://img.shields.io/badge/platform-Linux-orange?style=for-the-badge&logo=linux)
-![License](https://img.shields.io/badge/license-MIT-purple?style=for-the-badge)
+![image](https://github.com/user-attachments/assets/9c00b3ce-cb35-498f-9b8b-d75c086a3fbe)
 
 **A beautiful, lightweight AI chatbot desktop application powered by Google Gemini API**
 
