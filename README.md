@@ -155,17 +155,6 @@ Built files will be in the `dist/` directory:
 - **Clear History**: Press `Ctrl+L` to start fresh
 - **Change Settings**: Press `Ctrl+,` for options
 
-### Model Selection
-
-Choose the best AI model for your needs:
-
-| Model | Best For | Speed | Capability |
-|-------|----------|-------|------------|
-| **Gemini 2.0 Flash** | General use, fast responses | ⚡⚡⚡ | ⭐⭐⭐ |
-| **Gemini 1.5 Pro** | Complex tasks, reasoning | ⚡⚡ | ⭐⭐⭐⭐⭐ |
-| **Gemini 1.5 Flash** | Quick questions | ⚡⚡⚡ | ⭐⭐⭐ |
-| **Gemini 1.0 Pro** | Stable, reliable | ⚡⚡ | ⭐⭐⭐ |
-
 ---
 
 ## 🛠️ Development
