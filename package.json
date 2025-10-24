@@ -38,6 +38,7 @@
       "chatbot.html",
       "chatbot.js",
       "new_styles.css",
+      "src/**/*",
       "node_modules/**/*"
     ],
     "linux": {

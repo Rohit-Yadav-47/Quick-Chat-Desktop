@@ -725,3 +725,287 @@ pre {
     justify-content: center !important;
     flex-shrink: 0 !important;
 }
+
+/* Enhanced syntax highlighting for code blocks */
+.syntax-keyword {
+    color: #ff6188;
+    font-weight: 600;
+}
+
+.syntax-string {
+    color: #a9dc76;
+}
+
+.syntax-comment {
+    color: #727072;
+    font-style: italic;
+}
+
+.syntax-number {
+    color: #ab9df2;
+}
+
+.syntax-function {
+    color: #78dce8;
+}
+
+/* Enhanced code block styles */
+.raycast-code {
+    position: relative;
+    margin: 12px 0;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(15, 15, 20, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.raycast-code-language {
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ff6363;
+    letter-spacing: 0.5px;
+}
+
+.raycast-code pre {
+    padding: 12px;
+    margin: 0;
+}
+
+.raycast-code code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Inline code enhancement */
+.inline-code {
+    background: rgba(255, 99, 99, 0.15);
+    border: 1px solid rgba(255, 99, 99, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #ff6363;
+}
+
+/* Message formatting styles */
+.message-paragraph {
+    margin: 0;
+    padding: 0;
+}
+
+.message-paragraph:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.message-heading {
+    color: white;
+    font-weight: 600;
+    margin: 16px 0 8px 0;
+    line-height: 1.3;
+}
+
+.message-heading:first-child {
+    margin-top: 0;
+}
+
+.message-list {
+    margin: 8px 0;
+    padding-left: 24px;
+}
+
+.message-list.numbered {
+    list-style-type: decimal;
+}
+
+.list-item {
+    margin: 4px 0;
+    line-height: 1.6;
+}
+
+.message-link {
+    color: #4a9eff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(74, 158, 255, 0.3);
+    transition: all 0.2s;
+}
+
+.message-link:hover {
+    color: #6bb3ff;
+    border-bottom-color: rgba(74, 158, 255, 0.6);
+}
+
+.message-quote {
+    border-left: 3px solid #ff6363;
+    padding-left: 12px;
+    margin: 8px 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.message-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 16px 0;
+}
+
+/* Notification styles */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Settings modal animations */
+.settings-modal {
+    animation: fadeIn 0.2s ease;
+}
+
+.settings-panel {
+    animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Improved scrollbar for settings panel */
+.settings-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.settings-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.settings-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.settings-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced message animations */
+.raycast-message-container {
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Better hover states */
+button, select, input[type="range"] {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhanced copy button */
+.raycast-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.raycast-copy-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Loading state improvements */
+.raycast-loader {
+    filter: drop-shadow(0 0 4px rgba(255, 99, 99, 0.5));
+}
+
+/* Input focus animation */
+#raycast-input:focus {
+    animation: inputFocus 0.2s ease;
+}
+
+@keyframes inputFocus {
+    from {
+        opacity: 0.8;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Better visual feedback on interactive elements */
+.raycast-send-btn:active,
+.raycast-clear-btn:active,
+.raycast-settings-btn:active {
+    transform: scale(0.92);
+}
+
+/* Smooth transitions for UI state changes */
+.raycast-model-select,
+.raycast-send-btn,
+.raycast-clear-btn,
+.raycast-shortcut {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhanced shadow effects */
+.raycast-message {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.raycast-user-message {
+    box-shadow: 0 2px 12px rgba(255, 99, 99, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    #raycast-container {
+        width: 95vw;
+    }
+
+    .raycast-message {
+        max-width: 90%;
+    }
+}
+
+/* Performance optimization - Use GPU acceleration */
+.raycast-container,
+.raycast-message-container,
+.settings-modal,
+.settings-panel {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
